@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  tf-cpu:
+    build: .
+    volumes:
+      - ./notebooks:/notebooks
+      - ./data:/data
+      - ./:/code
+    ports:
+      - "8885:8888"
