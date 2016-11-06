@@ -1,11 +1,15 @@
 version: '2'
 
 volumes:
+  nvidia_driver_367.57:
+    external: true
   shared:
 
 services:
   tf-cpu:
-    build: .
+    build:
+      context: .
+      dockerfile: cpu.dockerfile
     volumes:
       - ./notebooks:/notebooks
       - ./data:/data
@@ -17,8 +21,31 @@ services:
       - "8885:8888"
     command: bash -c "cd /tensorbuilder && python setup.py install && cd /notebooks && /run_jupyter.sh"
 
+  tf-gpu:
+    build:
+      context: .
+      dockerfile: gpu.dockerfile
+    image: tf-gpu
+    volumes:
+      - ./notebooks:/notebooks
+      - ./data:/data
+      - ./models/:/models
+      - ./:/code
+      - shared:/logs
+      - ../tensorbuilder:/tensorbuilder
+      - nvidia_driver_367.57:/usr/local/nvidia:ro
+    devices:
+      - /dev/nvidia0:/dev/nvidia0
+      - /dev/nvidiactl:/dev/nvidiactl
+      - /dev/nvidia-uvm:/dev/nvidia-uvm
+    ports:
+      - "8886:8888"
+    command: bash -c "cd /tensorbuilder && python setup.py install && cd /notebooks && /run_jupyter.sh"
+
   tensorboard:
-    build: .
+    build:
+      context: .
+      dockerfile: cpu.dockerfile
     volumes:
       - shared:/logs
     ports:
