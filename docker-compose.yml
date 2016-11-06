@@ -1,11 +1,26 @@
 version: '2'
 
+volumes:
+  shared:
+
 services:
   tf-cpu:
     build: .
     volumes:
       - ./notebooks:/notebooks
       - ./data:/data
+      - ./models/:/models
       - ./:/code
+      - shared:/logs
+      - ../tensorbuilder:/tensorbuilder
     ports:
       - "8885:8888"
+    command: bash -c "cd /tensorbuilder && python setup.py install && cd /notebooks && /run_jupyter.sh"
+
+  tensorboard:
+    build: .
+    volumes:
+      - shared:/logs
+    ports:
+      - "6006:6006"
+    command: bash -c "rm -fr /logs/* && tensorboard --logdir=/logs"
