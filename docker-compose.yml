@@ -1,8 +1,9 @@
 version: '2'
 
 volumes:
-  nvidia_driver_367.57:
-    external: true
+  nvidia:
+    external:
+      name: nvidia_driver_367.57
   shared:
 
 services:
@@ -33,7 +34,7 @@ services:
       - ./:/code
       - shared:/logs
       - ../tensorbuilder:/tensorbuilder
-      - nvidia_driver_367.57:/usr/local/nvidia:ro
+      - nvidia:/usr/local/nvidia:ro
     devices:
       - /dev/nvidia0:/dev/nvidia0
       - /dev/nvidiactl:/dev/nvidiactl
