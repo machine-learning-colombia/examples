@@ -1,2 +1,0 @@
-model_checkpoint_path: "/models/mnist/mnist"
-all_model_checkpoint_paths: "/models/mnist/mnist"
