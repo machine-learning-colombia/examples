@@ -27,12 +27,7 @@ services:
       dockerfile: gpu.dockerfile
     image: tf-gpu
     volumes:
-      - ./notebooks:/notebooks
-      - ./data:/data
-      - ./models/:/models
-      - ./:/code
       - shared:/logs
-      - ../tensorbuilder:/tensorbuilder
       - nvidia:/usr/local/nvidia:ro
     devices:
       - /dev/nvidia0:/dev/nvidia0

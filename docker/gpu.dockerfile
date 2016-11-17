@@ -7,6 +7,8 @@ RUN pip install plotly
 RUN pip install sklearn
 RUN pip install asq
 
-RUN pip install tensorbuilder==0.0.18
+RUN pip install tensorbuilder==0.1.0
 
 WORKDIR /notebooks
+
+CMD /run_jupyter.sh
