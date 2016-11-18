@@ -1,2 +1,2 @@
-model_checkpoint_path: "mnist.model"
-all_model_checkpoint_paths: "mnist.model"
+model_checkpoint_path: "mnist-conv-only.model"
+all_model_checkpoint_paths: "mnist-conv-only.model"
