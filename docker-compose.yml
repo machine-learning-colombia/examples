@@ -9,7 +9,7 @@ volumes:
 services:
   tf-cpu:
     build:
-      context: .
+      context: ./docker
       dockerfile: cpu.dockerfile
     volumes:
       - ./notebooks:/notebooks
@@ -20,20 +20,14 @@ services:
       - ../tensorbuilder:/tensorbuilder
     ports:
       - "8885:8888"
-    command: bash -c "cd /tensorbuilder && python setup.py install && cd /notebooks && /run_jupyter.sh"
 
   tf-gpu:
     build:
-      context: .
+      context: ./docker
       dockerfile: gpu.dockerfile
     image: tf-gpu
     volumes:
-      - ./notebooks:/notebooks
-      - ./data:/data
-      - ./models/:/models
-      - ./:/code
       - shared:/logs
-      - ../tensorbuilder:/tensorbuilder
       - nvidia:/usr/local/nvidia:ro
     devices:
       - /dev/nvidia0:/dev/nvidia0
@@ -41,11 +35,10 @@ services:
       - /dev/nvidia-uvm:/dev/nvidia-uvm
     ports:
       - "8886:8888"
-    command: bash -c "cd /tensorbuilder && python setup.py install && cd /notebooks && /run_jupyter.sh"
 
   tensorboard:
     build:
-      context: .
+      context: ./docker
       dockerfile: cpu.dockerfile
     volumes:
       - shared:/logs
