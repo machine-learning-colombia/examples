@@ -1,6 +1,9 @@
 #ml-examples
-notebooks/notMNIST/notMNIST_large/
+notebooks/notMNIST/notMNIST*
 docker-compose.override.yml
+
+*.model
+*.meta
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
