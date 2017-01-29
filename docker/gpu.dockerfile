@@ -7,6 +7,7 @@ RUN pip install plotly
 RUN pip install tflearn
 RUN pip install asq
 RUN pip install networkx
+RUN pip install tensorbuilder
 
 WORKDIR /notebooks
 
