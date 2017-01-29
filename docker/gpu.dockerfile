@@ -1,13 +1,13 @@
-FROM tensorflow/tensorflow:0.11.0rc2-devel-gpu
+FROM tensorflow/tensorflow:0.12.1-gpu
 
 RUN apt-get update
 RUN apt-get -y install libjpeg8-dev
 
 RUN pip install plotly
-RUN pip install sklearn
+RUN pip install tflearn
 RUN pip install asq
-
-RUN pip install tensorbuilder==0.1.0
+RUN pip install networkx
+RUN pip install tensorbuilder
 
 WORKDIR /notebooks
 
